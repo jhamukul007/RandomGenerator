@@ -1,4 +1,4 @@
-package com.random.gen.indexs;
+package com.random.gen.primitives;
 
 import com.random.gen.base.RandomGenerator;
 /**
@@ -6,7 +6,7 @@ import com.random.gen.base.RandomGenerator;
  * @author Mukul
  *
  */
-public class RandomDouble {
+public class RandomDouble implements BasePrimitiveGenerator<Double>{
 	
 	//private static final double DEFAULT_START=Double.MIN_VALUE;
 	private static final double DEFAULT_END=Double.MAX_VALUE;
@@ -53,26 +53,36 @@ public class RandomDouble {
 			return new RandomDouble(this);
 		}
 	}
+	
+	public static RandomDoubleBuilder builder() {
+		return new RandomDoubleBuilder();
+	}
 
-	public double betweenDouble() {
+	@Override
+	public Double between() {
 		return this.start+RandomGenerator.RANDOM.nextDouble()*Math.abs(this.end-this.start);
 	}
 
-	public double betweenDoubleWithBound() {
+	@Override
+	public Double betweenWithBound() {
 		return Double.parseDouble(String.format("%."+(this.bound)+"f" ,
 				this.start+RandomGenerator.RANDOM
 				.nextDouble()*Math.abs(this.end-this.start)));
 	}
 
-	public double lesserDouble() {
+	@Override
+	public Double lesser() {
 		return RandomGenerator.RANDOM.nextDouble()%this.end;
 	}
 
-	public double greaterDouble() {
+	@Override
+	public Double greater() {
 		return this.start+RandomGenerator.RANDOM.nextDouble();
 	}
-	
-	public static RandomDoubleBuilder builder() {
-		return new RandomDoubleBuilder();
+
+	@Override
+	public Double betweenDigit() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

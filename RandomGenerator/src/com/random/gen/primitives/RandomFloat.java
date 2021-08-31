@@ -1,8 +1,8 @@
-package com.random.gen.indexs;
+package com.random.gen.primitives;
 
 import com.random.gen.base.RandomGenerator;
 
-public class RandomFloat{
+public class RandomFloat implements BasePrimitiveGenerator<Float>{
 	
 	private static final float DEFAULT_START=Float.MIN_VALUE;
 	private static final float DEFAULT_END=Float.MAX_VALUE;
@@ -50,25 +50,35 @@ public class RandomFloat{
 		}
 	}
 
-	public float betweenFloat() {
+	public static RandomFloatBuilder builder() {
+		return new RandomFloatBuilder();
+	}
+
+	@Override
+	public Float between() {
 		return start+RandomGenerator.RANDOM.nextFloat()*Math.abs(this.end-this.start);
 	}
 
-	public float betweenFloatWithBound() {
+	@Override
+	public Float betweenWithBound() {
 		return Float.parseFloat(String.format("%."+(this.bound)+"f" ,
 				this.start+RandomGenerator.RANDOM
 				.nextFloat()*Math.abs(this.end-this.start)));
 	}
 
-	public float lesserFloat() {
+	@Override
+	public Float lesser() {
 		return RandomGenerator.RANDOM.nextFloat()%this.end;
 	}
 
-	public float greaterFloat() {
+	@Override
+	public Float greater() {
 		return this.start+RandomGenerator.RANDOM.nextFloat();
 	}
-	
-	public static RandomFloatBuilder builder() {
-		return new RandomFloatBuilder();
+
+	@Override
+	public Float betweenDigit() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
